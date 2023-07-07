@@ -4,5 +4,12 @@
 3. [Lesson_3](https://skyengpublic.notion.site/Python-915f1d136dc542e3a97f8e0b70008456)
 4. [Lesson_4](https://skyengpublic.notion.site/pytest-4b9f486a9d204b82a7f277286cd5a3eb)
 5. [Lesson_5]()
+6. [Lesson_6]()
+7. [Lesson_7]()
+8. [Lesson_8]()
+9. [Lesson_9]()
+10. [Lesson_10]()
+11. [Lesson_11]()
+12. [Lesson_12]()
 
  
