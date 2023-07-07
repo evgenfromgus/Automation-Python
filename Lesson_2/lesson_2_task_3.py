@@ -1,6 +1,7 @@
+import math
 def square(side):
-    return int(side*side + 0.5)
+    return math.ceil((side*side))
 print(square(3))
-print(square(3.35))
+print(square(1.1))
 
 
