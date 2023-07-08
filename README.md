@@ -4,7 +4,7 @@
 3. [Lesson_3](https://skyengpublic.notion.site/Python-915f1d136dc542e3a97f8e0b70008456)
 4. [Lesson_4](https://skyengpublic.notion.site/pytest-4b9f486a9d204b82a7f277286cd5a3eb)
 5. [Lesson_5](https://skyengpublic.notion.site/UI-606e383fed5e4126ba5461d3f6ffc88a)
-6. [Lesson_6]()
+6. [Lesson_6](https://skyengpublic.notion.site/Selenium-e732682b1b394e95a06b72bf552376de)
 7. [Lesson_7]()
 8. [Lesson_8]()
 9. [Lesson_9]()
