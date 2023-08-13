@@ -6,7 +6,7 @@
 5. [Lesson_5](https://skyengpublic.notion.site/UI-606e383fed5e4126ba5461d3f6ffc88a)
 6. [Lesson_6](https://skyengpublic.notion.site/Selenium-e732682b1b394e95a06b72bf552376de)
 7. [Complex](https://skyengpublic.notion.site/PageObject-3683a9df813c49e7a761a373a17c9554)
-8. [Lesson_7]()
+8. [Lesson_7](https://skyengpublic.notion.site/PageObject-3683a9df813c49e7a761a373a17c9554)
 9. [Lesson_8]()
 10. [Lesson_9]()
 11. [Lesson_10]()
