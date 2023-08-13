@@ -1,6 +1,6 @@
 from Lesson_7.pages.Mainpage import MainPage
 from Lesson_7.pages.Datafildes import DataFild
-from Lesson_7.conftest import *
+# from Lesson_7.conftest import *
 
 
 def test_assertion(chrome_browsers):
