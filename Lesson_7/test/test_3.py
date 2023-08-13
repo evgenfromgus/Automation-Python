@@ -1,5 +1,5 @@
-from Lesson_7.pages.Shopmain import ShopmainPage
-from Lesson_7.pages.Shopcontainer import ShopContainer
+from pages.Shopmain import ShopmainPage
+from pages.Shopcontainer import ShopContainer
 
 
 def test_shop(chrome_browsers):

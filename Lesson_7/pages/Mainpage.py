@@ -1,8 +1,8 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-from Lesson_7.constants import Test_form_URL
-from Lesson_7.data.data import *
+from constants import Test_form_URL
+from data.data import *
 
 
 class MainPage:

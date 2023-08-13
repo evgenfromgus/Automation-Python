@@ -1,6 +1,5 @@
-from Lesson_7.pages.Mainpage import MainPage
-from Lesson_7.pages.Datafildes import DataFild
-
+from pages.Mainpage import MainPage
+from pages.Datafildes import DataFild
 
 def test_assertion(chrome_browsers):
     main_page = MainPage(chrome_browsers)
