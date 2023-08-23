@@ -10,4 +10,6 @@ class InsertLogpass:
         log_pass = {'username': username, 'password': password}
         resp_token = requests.post(X_client_URL + '/auth/login', json=log_pass)
         token = resp_token.json()['userToken']
-        return token
+        code = resp_token.status_code
+        # print(code)
+        return token, code

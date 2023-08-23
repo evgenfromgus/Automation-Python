@@ -9,5 +9,5 @@ class GetCompany:
     def test_get_list_companies(self):
         param_true = {'active': 'true'}
         resp_companies = requests.get(X_client_URL + '/company', params=param_true)
-        last_companie_id = resp_companies.json()[-1]['id']
-        return last_companie_id
+        last_companies_id = resp_companies.json()[-1]['id']
+        return last_companies_id
