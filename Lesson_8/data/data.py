@@ -1,14 +1,20 @@
-from pages.Company import GetCompany
+# from pages.Company import GetCompany
+#
+# ide = GetCompany(GetCompany)
+# company_id = ide.get_list_companies()
 
-ide = GetCompany(GetCompany)
-company_id = ide.test_get_list_companies()
+
+def company(get_list_companies):
+    company_id = get_list_companies
+    yield company_id
+
 
 body_employer = {
     'id': 0,
     'firstName': 'Ivan',
     'lastName': 'Petrov',
     'middleName': 'string',
-    'companyId': company_id,
+    'companyId': company,
     'email': 'test@mail.ru',
     'url': 'string',
     'phone': 'string',
