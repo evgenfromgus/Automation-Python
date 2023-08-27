@@ -5,13 +5,13 @@ path = '/employee/'
 
 
 class Employer:
-    def __init__(self, url):
+    def __init__(self, url=X_client_URL):
         self.url = url
 
     def get_list_employers(self, get_list_companies):
         company_id = get_list_companies
         company = {'company': company_id}
-        resp_employers = requests.get(X_client_URL + '/employee', params=company)
+        resp_employers = requests.get(self.url + '/employee', params=company)
         list_employers = resp_employers.json()
         code = resp_employers.status_code
         print(list_employers, code)
@@ -19,7 +19,7 @@ class Employer:
 
     def get_new_employer(self, add_new_employer):
         id_new_employer = str(add_new_employer[0])
-        resp_get_new_employer = requests.get(X_client_URL + path + id_new_employer)
+        resp_get_new_employer = requests.get(self.url + path + id_new_employer)
         info_new_employer = resp_get_new_employer.json()
         id_new_emp = resp_get_new_employer.json()['id']
         code = resp_get_new_employer.status_code
@@ -36,14 +36,14 @@ class Employer:
             'phone': 'string',
             'isActive': 'true'
         }
-        resp_change_employer = requests.patch(X_client_URL + path + id_employer, headers=headers,
+        resp_change_employer = requests.patch(self.url + path + id_employer, headers=headers,
                                               json=body_change_employer)
         inform_changed_employer_id = resp_change_employer.json()['id']
         return inform_changed_employer_id, body_change_employer
 
     def get_new_employer_changed(self, add_new_employer):
         id_employer = str(add_new_employer[0])
-        resp_new_employer_info_changed = requests.get(X_client_URL + path + id_employer)
+        resp_new_employer_info_changed = requests.get(self.url + path + id_employer)
         info_new_employer_id = resp_new_employer_info_changed.json()['id']
         info_new_employer_lastName = resp_new_employer_info_changed.json()['lastName']
         info_new_employer_email = resp_new_employer_info_changed.json()['email']

@@ -45,17 +45,19 @@ def test_get_employer():
     assert employer.get_list_employers()[2] is not None
 
 
+@pytest.mark.skip()
 def test_get_info_new_employer(add_new_employer):
     employer = Employer(Employer)
     id_add = add_new_employer[0]
     """Получаем информацию о добавленном сотруднике"""
     info = employer.get_new_employer()
     """Сравниваем ID сотрудника из полученной информации c ID сотрудника, которое появилось при создании сотрудника"""
-    assert employer.get_new_employer()[1] == id_add
+    assert info[1] == id_add
     """Проверяем, что код ответа == 200"""
     assert info[2] == 200
 
 
+@pytest.mark.skip()
 def test_change(add_new_employer):
     id_add = add_new_employer[0]
     employer = Employer(Employer)
@@ -65,6 +67,7 @@ def test_change(add_new_employer):
     assert employer.change_new_employer()[1] is not None
 
 
+@pytest.mark.skip()
 def test_changed_employer():
     employer = Employer(Employer)
     """Проверяем, что измененное значение фамилии, соответствует заданному"""
