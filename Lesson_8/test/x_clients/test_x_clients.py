@@ -31,46 +31,45 @@ def test_add_employer(add_new_employer):  # Новый сотрудник соз
     assert new_employer_headers is not None
 
 
-def test_get_employer():
-    employer = Employer(Employer)
+def test_get_employer(get_list_companies):
+    employer = Employer()
+    company_id = get_list_companies
     """Получаем список работников конкретной компании"""
-    list = employer.get_list_employers()[0]
-    """Получаем код ответа сервера"""
-    xcode = employer.get_list_employers()[1]
+    list_employers = employer.get_list_employers(company_id)
     """Проверяем, что нам вернулся список [], а не строка, число или др. тип"""
-    assert isinstance(list, list)
+    assert isinstance(list_employers[0], list)
     """Проверяем, что код ответа == 200"""
-    assert xcode == 200
+    assert list_employers[1] == 200
     """Проверяем, что параметры ID компании в запросе не пустые"""
-    assert employer.get_list_employers()[2] is not None
+    assert list_employers[2] is not None
 
 
-@pytest.mark.skip()
 def test_get_info_new_employer(add_new_employer):
-    employer = Employer(Employer)
-    id_add = add_new_employer[0]
+    employer = Employer()
+    id_new_employer = add_new_employer[0]
     """Получаем информацию о добавленном сотруднике"""
-    info = employer.get_new_employer()
+    info = employer.get_new_employer(id_new_employer)
     """Сравниваем ID сотрудника из полученной информации c ID сотрудника, которое появилось при создании сотрудника"""
-    assert info[1] == id_add
+    assert info[1] == id_new_employer
     """Проверяем, что код ответа == 200"""
     assert info[2] == 200
 
 
-@pytest.mark.skip()
-def test_change(add_new_employer):
-    id_add = add_new_employer[0]
-    employer = Employer(Employer)
+def test_change(add_new_employer, get_token):
+    employer = Employer()
+    id_new_employer = add_new_employer[0]
+    token = get_token[0]
+    response = employer.change_new_employer(id_new_employer, token)
     """Проверяем, что ID сотрудника соответствует ID при создании сотрудника"""
-    assert employer.change_new_employer()[0] == id_add
+    assert response[0] == id_new_employer
     """Проверяем, что тело в запрос ушло не пустое"""
-    assert employer.change_new_employer()[1] is not None
+    assert response[1] is not None
 
 
-@pytest.mark.skip()
 def test_changed_employer():
-    employer = Employer(Employer)
+    employer = Employer()
+    changed = employer.get_new_employer_changed()
     """Проверяем, что измененное значение фамилии, соответствует заданному"""
-    assert employer.get_new_employer_changed()[1] == 'Pupkin'
+    assert changed[1] == 'Pupkin'
     """Проверяем, что измененное значение почты, соответствует заданному"""
-    assert employer.get_new_employer_changed()[2] == 'test2@mail.ru'
+    assert changed[2] == 'test2@mail.ru'
