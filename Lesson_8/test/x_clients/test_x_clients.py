@@ -44,6 +44,28 @@ def test_get_employer(get_list_companies):
     assert list_employers[2] is not None
 
 
+"""Проверяем, обязательное поле 'ID компании' в запросе на получение списка работников - без ID компании"""
+
+
+def test_get_list_employers_missing_company_id():
+    employer = Employer()
+    try:
+        employer.get_list_employers()
+    except TypeError as e:
+        assert str(e) == "Employer.get_list_employers() missing 1 required positional argument: 'company_id'"
+
+
+"""Проверяем, обязательное поле 'ID компании' в запросе на получение списка работников - не валидное ID компании(пустая строка)"""
+
+
+def test_get_list_employers_invalid_company_id():
+    employer = Employer()
+    try:
+        employer.get_list_employers('')
+    except TypeError as e:
+        assert str(e) == "Employer.get_list_employers() missing 1 required positional argument: 'company_id'"
+
+
 def test_get_info_new_employer(add_new_employer):
     employer = Employer()
     id_new_employer = add_new_employer[0]
@@ -55,6 +77,17 @@ def test_get_info_new_employer(add_new_employer):
     assert info[2] == 200
 
 
+"""Проверяем, обязательное поле 'ID сотрудника' в запросе на получение информации о сотрудника - без ID сотрудника"""
+
+
+def test_get_info_new_employers_missing_employer_id():
+    employer = Employer()
+    try:
+        employer.get_new_employer()
+    except TypeError as e:
+        assert str(e) == "Employer.get_new_employer() missing 1 required positional argument: 'id_new_employer'"
+
+
 def test_change(add_new_employer, get_token):
     employer = Employer()
     id_new_employer = add_new_employer[0]
@@ -64,6 +97,18 @@ def test_change(add_new_employer, get_token):
     assert response[0] == id_new_employer
     """Проверяем, что тело в запрос ушло не пустое"""
     assert response[1] is not None
+
+
+"""Проверяем, обязательное поле 'ID сотрудника' и 'token' в запросе на изменение информации о сотруднике - без ID сотрудника и токена"""
+
+
+def test_employers_missing_id_and_token():
+    employer = Employer()
+    try:
+        employer.change_new_employer()
+    except TypeError as e:
+        assert str(
+            e) == "Employer.change_new_employer() missing 2 required positional arguments: 'id_new_employer' and 'token'"
 
 
 def test_changed_employer():
