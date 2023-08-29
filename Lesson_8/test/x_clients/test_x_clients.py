@@ -1,5 +1,7 @@
 import pytest
+import requests
 from pages.Employee import Employer
+from constants import X_client_URL
 
 
 def test_authorization(get_token):
@@ -29,6 +31,19 @@ def test_add_employer(add_new_employer):  # Новый сотрудник соз
     assert new_employer_id is not None
     """Проверяем, что заголовки не пустые"""
     assert new_employer_headers is not None
+
+
+"""Проверяем невозможность создания клиента без токена и тела запроса"""
+
+
+def test_add_employer_without_token_and_body():
+    headers = {}
+    body_employer = {}
+    resp_add_new_employer = requests.post(X_client_URL + '/employee', headers=headers, json=body_employer)
+    message = resp_add_new_employer.json()['message']
+    code = resp_add_new_employer.status_code
+    assert message == 'Unauthorized'
+    assert code == 401
 
 
 def test_get_employer(get_list_companies):
