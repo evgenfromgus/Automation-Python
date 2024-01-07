@@ -1,6 +1,6 @@
 import pytest
-from Lesson_9.pages.Employee import Employer
-from Lesson_9.pages.DataBase import DataBase
+from pages.Employee import Employer
+from pages.DataBase import DataBase
 import allure
 
 api = Employer("https://x-clients-be.onrender.com")
