@@ -5,7 +5,7 @@ path = '/employee/'
 X_client_URL = " https://x-clients-be.onrender.com"
 
 
-class Employer:
+class Employee:
     def __init__(self, url=X_client_URL):
         self.url = url
         changed_emp_id = None
@@ -18,7 +18,7 @@ class Employer:
         return token
 
     @allure.step("Создаем компанию по названию и описанию")
-    def creating_company(self, name: str, description: str):
+    def create_company(self, name: str, description: str):
         headers = {'x-client-token': str(self.get_token)}
         company = {
             "name": name,
@@ -53,7 +53,7 @@ class Employer:
         return resp_add_new_employer
 
     @allure.step("Получаем информацию о сотруднике по его ID")
-    def get_employee_by_id(self, id_employee: int):
+    def get_employer_by_id(self, id_employee: int):
         resp = requests.get(self.url + path + str(id_employee)).json()
         return resp
 

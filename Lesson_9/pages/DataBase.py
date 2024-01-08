@@ -20,7 +20,7 @@ class DataBase:
         'item_SELECT': text('select * from employee where company_id = :c_id and id = :e_id'),
         'maxID_SELECT': text('select MAX(id) from employee where company_id = :c_id'),
         'item_DELETE': text('delete from employee where id = :id_delete'),
-        'item_UPDATE': text('update employee set first_name = :new_name where id = :employee_id'),
+        'item_UPDATE': text('update employee set first_name = :new_name where id = :employer_id'),
         'item_INSERT': text(
             'insert into employee(company_id, first_name, last_name, phone) values(:id, :name, :surname, :phone_num)')
     }
@@ -31,7 +31,7 @@ class DataBase:
         self.db = create_engine(engine)
 
     @allure.step("Cоздаем компанию в БД")
-    def create(self, new_name: str, description: str):
+    def create_company_db(self, new_name: str, description: str):
         try:
             with self.db.connect() as connection:
                 result = connection.execute(self.query['create_company'],
@@ -72,7 +72,7 @@ class DataBase:
                 print("[INFO] DB connection closed")
 
     @allure.step("Получаем список сотрудников из БД")
-    def db_get_list_employee(self, company_id: int):
+    def db_get_list_employer(self, company_id: int):
         try:
             with self.db.connect() as connection:
                 result = connection.execute(self.query['list_SELECT'], parameters=dict(id=company_id)).fetchall()
@@ -85,7 +85,7 @@ class DataBase:
                 print("[INFO] DB connection closed")
 
     @allure.step("Создаем сотрудника в БД")
-    def db_create_employee(self, company_id: int, first_name: str, last_name: str, phone: str):
+    def db_create_employer(self, company_id: int, first_name: str, last_name: str, phone: str):
         try:
             with self.db.connect() as connection:
                 result = connection.execute(self.query['item_INSERT'],
@@ -101,7 +101,7 @@ class DataBase:
                 print("[INFO] DB connection closed")
 
     @allure.step("Получаем ID сотрудника в из БД")
-    def db_get_employee_id(self, company_id: int):
+    def db_get_employer_id(self, company_id: int):
         try:
             with self.db.connect() as connection:
                 result = connection.execute(self.query['maxID_SELECT'], parameters=dict(c_id=company_id)).fetchall()[0][
@@ -115,11 +115,11 @@ class DataBase:
                 print("[INFO] DB connection closed")
 
     @allure.step("Изменяем информацию о сотруднике в БД")
-    def update_employee_info(self, new_name: str, id: int):
+    def update_employer_info(self, new_name: str, id: int):
         try:
             with self.db.connect() as connection:
                 result = connection.execute(self.query['item_UPDATE'],
-                                            parameters=dict(new_name=new_name, employee_id=id))
+                                            parameters=dict(new_name=new_name, employer_id=id))
                 connection.commit()
         except Exception as _ex:
             print("[INFO] Error - can't work with SQL", _ex)
@@ -129,7 +129,7 @@ class DataBase:
                 print("[INFO] DB connection closed")
 
     @allure.step("Удаляем сотрудника из БД")
-    def db_delete_employee(self, id: int):
+    def db_delete_employer(self, id: int):
         try:
             with self.db.connect() as connection:
                 result = connection.execute(self.query['item_DELETE'], parameters=dict(id_delete=id))

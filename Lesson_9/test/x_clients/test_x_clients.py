@@ -11,18 +11,19 @@ db = DataBase(
 @allure.epic("X-clients")
 @allure.severity(severity_level='normal')
 @allure.title("Список сотрудников")
-def test_get_list_of_employees():
+def test_get_list_of_employers():
     with allure.step("БД - Создаем компанию"):
-        db.create('Evgen testers', 'cool_company')
+        db.create_company_db('Evgen testers', 'cool_company')
     with allure.step("БД - Получаем ID последней созданной компании"):
         max_id = db.get_max_id()
+    with allure.step("БД - добавляем сотрудника в компанию"):
+        db.db_create_employer(max_id, "Evgen", "Voronov", 8002000600)
     with allure.step("БД - Получаем список сотрудников из последней созданной компании"):
-        db_employee_list = db.db_get_list_employee(max_id)
+        db_employer_list = db.db_get_list_employer(max_id)
     with allure.step("API - Получаем список сотрудников из последней созданной компании"):
-        api_employee_list = api.get_list_employers(max_id)
-        print(api_employee_list)
+        api_employer_list = api.get_list_employers(max_id)
     with allure.step("Сравниваем списки сотрудников полученных ид БД и через API"):
-        assert len(db_employee_list) == len(api_employee_list)
+        assert len(db_employer_list) == len(api_employer_list)
     with allure.step("БД - Удаляем последнюю созданную компанию"):
         db.delete_company(max_id)
 
@@ -30,12 +31,12 @@ def test_get_list_of_employees():
 @allure.epic("X-clients")
 @allure.severity(severity_level='critical')
 @allure.title("Добавление сотрудников")
-def test_add_new_employee():
-    db.create('Evgen adding new employee', 'employer')
+def test_add_new_employer():
+    db.create_company_db('Evgen adding new employer', 'employer')
     max_id = db.get_max_id()
-    new_employee = db.db_create_employee(max_id, "Evgen", "Voronov", 8002000600)
+    db.db_create_employer(max_id, "Evgen", "Voronov", 8002000600)
     resp = api.get_list_employers(max_id)
-    employee_id = resp[0]["id"]
+    employer_id = resp[0]["id"]
     """Сравниваем ID компании"""
     assert resp[0]["companyId"] == max_id
     """Сравниваем имя сотрудника с заданным"""
@@ -45,7 +46,7 @@ def test_add_new_employee():
     """Сравниваем фамилию сотрудника с заданной"""
     assert resp[0]["lastName"] == "Voronov"
     """БД - удаляем созданного сотрудника"""
-    db.db_delete_employee(employee_id)
+    db.db_delete_employer(employer_id)
     """БД - Удаляем последнюю созданную компанию"""
     db.delete_company(max_id)
 
@@ -53,17 +54,17 @@ def test_add_new_employee():
 @allure.epic("X-clients")
 @allure.severity(severity_level='trivial')
 @allure.title("Получение информации о сотруднике по ID")
-def test_get_employee_by_id():
-    db.create('Employee get id company', 'new')
+def test_get_employer_by_id():
+    db.create_company_db('Employer get id company', 'new')
     max_id = db.get_max_id()
-    new_employee = db.db_create_employee(max_id, "Evgen", "Voronov", 8002000600)
-    employee_id = db.db_get_employee_id(max_id)
+    db.db_create_employer(max_id, "Evgen", "Voronov", 8002000600)
+    employer_id = db.db_get_employer_id(max_id)
     """Сравниваем информацию о сотруднике полученную по API с информацией указанной при создании сотрудника в БД"""
-    get_info = api.get_employee_by_id(employee_id)
+    get_info = api.get_employer_by_id(employer_id)
     assert get_info["firstName"] == "Evgen"
     assert get_info["lastName"] == "Voronov"
     """БД - удаляем созданного сотрудника"""
-    db.db_delete_employee(employee_id)
+    db.db_delete_employer(employer_id)
     """БД - Удаляем последнюю созданную компанию"""
     db.delete_company(max_id)
 
@@ -72,17 +73,17 @@ def test_get_employee_by_id():
 @allure.severity(severity_level='normal')
 @allure.title("Обновление информации о сотруднике")
 def test_update_user_info():
-    db.create('New updating company', 'test')
+    db.create_company_db('New updating company', 'test')
     max_id = db.get_max_id()
-    new_employee = db.db_create_employee(max_id, "Evgen", "Voronov", 8002000600)
-    employee_id = db.db_get_employee_id(max_id)
-    db.update_employee_info("King", employee_id)
+    db.db_create_employer(max_id, "Evgen", "Voronov", 8002000600)
+    employer_id = db.db_get_employer_id(max_id)
+    db.update_employer_info("King", employer_id)
     """Сравниваем информацию о сотруднике полученную по API с измененной информацией в БД информацией о сотруднике"""
-    get_info = api.get_employee_by_id(employee_id)
+    get_info = api.get_employer_by_id(employer_id)
     assert get_info["firstName"] == "King"
     assert get_info["lastName"] == "Voronov"
     assert get_info["isActive"] == True
     """БД - удаляем созданного сотрудника"""
-    db.db_delete_employee(employee_id)
+    db.db_delete_employer(employer_id)
     """БД - Удаляем последнюю созданную компанию"""
     db.delete_company(max_id)
