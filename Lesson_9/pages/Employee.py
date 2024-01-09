@@ -5,7 +5,7 @@ path = '/employee/'
 X_client_URL = " https://x-clients-be.onrender.com"
 
 
-class Employee:
+class Employer:
     def __init__(self, url=X_client_URL):
         self.url = url
         changed_emp_id = None

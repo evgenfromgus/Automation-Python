@@ -2,3 +2,8 @@
 .pytest_cache/
 __init__.py
 .linux_venv/
+.vscode/
+Lesson_9/.pytest_cache/
+Lesson_9/results/
+Lesson_9/sreda/
+Lesson_9/test/x_clients/__pycache__/

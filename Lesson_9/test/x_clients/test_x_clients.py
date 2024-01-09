@@ -1,4 +1,6 @@
 import pytest
+import sys
+sys.path.append('/home/evgen/Documents/Automation-Python/Lesson_9')
 from pages.Employee import Employer
 from pages.DataBase import DataBase
 import allure
@@ -11,6 +13,8 @@ db = DataBase(
 @allure.epic("X-clients")
 @allure.severity(severity_level='normal')
 @allure.title("Список сотрудников")
+@allure.description("Получаем список сотрудников из БД и АПИ, после чего сравниваем их")
+@allure.feature('Тест 1')
 def test_get_list_of_employers():
     with allure.step("БД - Создаем компанию"):
         db.create_company_db('Evgen testers', 'cool_company')
@@ -31,6 +35,8 @@ def test_get_list_of_employers():
 @allure.epic("X-clients")
 @allure.severity(severity_level='critical')
 @allure.title("Добавление сотрудников")
+@allure.description("Добавляем сотрудника в БД и сравниваем с АПИ имя, статус и фамилию")
+@allure.feature('Тест 2')
 def test_add_new_employer():
     db.create_company_db('Evgen adding new employer', 'employer')
     max_id = db.get_max_id()
@@ -54,6 +60,8 @@ def test_add_new_employer():
 @allure.epic("X-clients")
 @allure.severity(severity_level='trivial')
 @allure.title("Получение информации о сотруднике по ID")
+@allure.description("Сравниваем информацию о сотруднике полученную по API с информацией указанной при создании сотрудника в БД")
+@allure.feature('Тест 3')
 def test_get_employer_by_id():
     db.create_company_db('Employer get id company', 'new')
     max_id = db.get_max_id()
@@ -72,6 +80,8 @@ def test_get_employer_by_id():
 @allure.epic("X-clients")
 @allure.severity(severity_level='normal')
 @allure.title("Обновление информации о сотруднике")
+@allure.description("Сравниваем информацию о сотруднике полученную по API с измененной информацией в БД информацией о сотруднике")
+@allure.feature('Тест 4')
 def test_update_user_info():
     db.create_company_db('New updating company', 'test')
     max_id = db.get_max_id()
