@@ -3,13 +3,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from constants import Test_form_URL
 from data.data import *
-
+import allure
 
 class MainPage:
     def __init__(self, browser):
         self.browser = browser
         self.browser.get(Test_form_URL)
 
+    @allure.step("Находим необходимые поля")
     def find_fields(self):
         self._first_name = (By.NAME, "first-name")
         self._last_name = (By.NAME, "last-name")
@@ -23,6 +24,7 @@ class MainPage:
         self._company = (By.NAME, "company")
         self._button = (By.TAG_NAME, "button")
 
+    @allure.step("Заполняем найденные поля")
     def filling_in_the_fields(self):
         self.browser.find_element(*self._first_name).send_keys(first_name)
         self.browser.find_element(*self._last_name).send_keys(last_name)
@@ -35,5 +37,6 @@ class MainPage:
         self.browser.find_element(*self._job_position).send_keys(job_position)
         self.browser.find_element(*self._company).send_keys(company)
 
+    @allure.step("Кликаем на кнопку подтверждения")
     def click_submit_button(self):
         WebDriverWait(self.browser, 40, 0.1).until(EC.element_to_be_clickable(self._button)).click()

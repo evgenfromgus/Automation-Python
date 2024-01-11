@@ -1,10 +1,11 @@
 from selenium.webdriver.common.by import By
-
+import allure
 
 class DataFild:
     def __init__(self, browser):
         self.browser = browser
 
+    @allure.step("Ищем заполненные поля")
     def find_fields(self):
         self.class_first_name = (By.ID, "first-name")
         self.class_last_name = (By.ID, "last-name")
@@ -16,7 +17,8 @@ class DataFild:
         self.class_country = (By.ID, "job-position")
         self.class_job_position = (By.ID, "country")
         self.class_company = (By.ID, "company")
-
+    
+    @allure.step("Удостоверяемся, что форма заполнена верно и поля подсвечены зеленым")
     def get_class_first_name(self):
         return self.browser.find_element(*self.class_first_name).get_attribute("class")
 
