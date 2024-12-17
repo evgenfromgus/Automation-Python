@@ -1,9 +1,0 @@
-.idea/
-.pytest_cache/
-__init__.py
-.linux_venv/
-.vscode/
-.pytest_cache/
-.results/
-.sreda/
-.test/x_clients/__pycache__/
